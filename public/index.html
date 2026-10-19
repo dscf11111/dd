@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17131b">
+    <title>마음 파쇄소</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/animations.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="마음 파쇄소 홈">
+          <span class="brand-mark" aria-hidden="true">✂</span>
+          <span>마음 파쇄소</span>
+        </a>
+        <div class="topbar-actions">
+          <button id="history-open" class="icon-button" type="button" aria-label="파쇄 기록 보기" title="파쇄 기록">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.5 2"></path></svg>
+          </button>
+          <details id="account-menu" class="account-menu">
+            <summary>
+              <span id="user-name"></span><span>회원님</span>
+              <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m3 6 5 5 5-5"></path></svg>
+            </summary>
+            <div class="account-menu-panel">
+              <form id="profile-form" class="profile-form">
+                <div class="menu-section-heading">
+                  <strong>프로필</strong>
+                  <span>표시할 아이디를 수정할 수 있어요.</span>
+                </div>
+                <label for="profile-username">아이디</label>
+                <div class="profile-edit-row">
+                  <input id="profile-username" name="username" type="text" maxlength="64" required>
+                  <button class="small-button" type="submit">저장</button>
+                </div>
+                <p id="profile-message" class="form-message" role="status"></p>
+              </form>
+              <div class="theme-section">
+                <strong>화면 테마</strong>
+                <div class="theme-switch" role="group" aria-label="화면 테마 선택">
+                  <button type="button" data-theme-choice="light">화이트</button>
+                  <button type="button" data-theme-choice="dark">다크</button>
+                </div>
+              </div>
+              <button id="logout-button" class="menu-action" type="button">로그아웃</button>
+              <details class="delete-account-menu">
+                <summary>계정 삭제</summary>
+                <p>계정을 삭제하면 저장된 기록도 모두 삭제돼요.</p>
+                <button id="delete-account-button" class="menu-action danger-action" type="button">계정 삭제하기</button>
+              </details>
+            </div>
+          </details>
+        </div>
+      </header>
+
+      <main>
+        <section id="landing-panel" class="landing-panel">
+          <div class="landing-copy">
+            <p class="eyebrow">마음이 복잡한 날</p>
+            <h1>적고, 고르고,<br><span>후련하게 보내요.</span></h1>
+            <p>마음속에 쌓인 말을 적고, 나에게 맞는 방식으로 가볍게 털어놓으세요.</p>
+          </div>
+          <section id="auth-panel" class="auth-card" aria-labelledby="auth-title">
+            <div class="auth-heading">
+              <p class="eyebrow">나만의 작은 공간</p>
+              <h2 id="auth-title">마음 파쇄소에 오신 걸 환영해요</h2>
+              <p>아이디와 비밀번호로 나만의 기록을 안전하게 보관하세요.</p>
+            </div>
+            <div class="auth-tabs" role="tablist" aria-label="계정 메뉴">
+              <button id="show-login" class="auth-tab is-active" type="button" role="tab" aria-selected="true">로그인</button>
+              <button id="show-register" class="auth-tab" type="button" role="tab" aria-selected="false">회원가입</button>
+            </div>
+            <form id="auth-form" class="auth-form">
+              <label for="username">아이디</label>
+              <input id="username" name="username" type="text" autocomplete="username" maxlength="64" required>
+              <label for="password">비밀번호 <span id="password-hint" hidden>(영문과 숫자 포함, 8자 이상)</span></label>
+              <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="256" required>
+              <button id="auth-submit" class="button button-primary" type="submit">로그인</button>
+              <p id="auth-message" class="form-message" role="status"></p>
+            </form>
+          </section>
+        </section>
+
+        <section id="app-panel" class="app-panel" hidden>
+          <div class="workbench">
+            <section class="compose-card" aria-labelledby="compose-title">
+              <div class="compose-heading">
+                <p class="eyebrow">잠시 멈춰, 마음을 들여다봐요</p>
+                <h1 id="compose-title">지금 마음을 적어주세요</h1>
+              </div>
+              <div class="paper-wrap">
+                <label class="sr-only" for="anger-text">파쇄할 내용을 적어주세요</label>
+                <textarea id="anger-text" maxlength="5000" placeholder="여기에 마음을 자유롭게 적어보세요.
+다 적고 나면 파쇄할 수 있어요." rows="12"></textarea>
+                <div class="paper-count"><span>최대 5,000자</span><span id="char-count">0 / 5,000</span></div>
+              </div>
+              <fieldset class="mode-picker">
+                <legend class="sr-only">파쇄 모드 선택</legend>
+                <div class="mode-grid">
+                  <label class="mode-option is-selected">
+                    <input type="radio" name="mode" value="shredder" checked>
+                    <span class="mode-icon shredder-icon" aria-hidden="true">🧻</span>
+                    <span class="mode-name">문서 파쇄</span>
+                  </label>
+                  <label class="mode-option">
+                    <input type="radio" name="mode" value="blackhole">
+                    <span class="mode-icon blackhole-icon" aria-hidden="true">◉</span>
+                    <span class="mode-name">블랙홀</span>
+                  </label>
+                  <label class="mode-option">
+                    <input type="radio" name="mode" value="fire">
+                    <span class="mode-icon fire-icon" aria-hidden="true">🔥</span>
+                    <span class="mode-name">불태우기</span>
+                  </label>
+                </div>
+              </fieldset>
+              <div class="action-row">
+                <button id="shred-button" class="button button-shred" type="button">✂ 파쇄하기</button>
+                <button id="sound-toggle" class="button button-sound" type="button" aria-pressed="true"><span id="sound-icon" aria-hidden="true">♫</span><span id="sound-label">소리 켜짐</span></button>
+              </div>
+              <p id="shred-message" class="form-message" role="status" aria-live="polite"></p>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="footer-stat"><span class="status-dot" aria-hidden="true"></span><span id="today-copy">오늘 총 0자가 파쇄되었어요 · 0회</span></span>
+        <span class="footer-note">마음에 쌓인 것을 가볍게 내려놓아요.</span>
+      </footer>
+
+      <dialog id="history-dialog" class="history-dialog" aria-labelledby="history-title">
+        <div class="dialog-shell">
+          <header class="dialog-header">
+            <div>
+              <p class="eyebrow">지금까지의 기록</p>
+              <h2 id="history-title">파쇄 기록</h2>
+            </div>
+            <div class="dialog-header-actions">
+              <button id="delete-all-button" class="text-button danger-text" type="button">전체 삭제</button>
+              <button id="history-close" class="icon-button close-button" type="button" aria-label="기록 닫기">×</button>
+            </div>
+          </header>
+          <p id="history-message" class="form-message" role="status"></p>
+          <div id="history-list" class="history-list"></div>
+        </div>
+      </dialog>
+    </div>
+    <div id="shred-stage" class="shred-stage" role="status" aria-live="polite" tabindex="-1" hidden>
+      <section class="shred-scene scene-shredder" aria-hidden="true">
+        <div class="scene-haze"></div>
+        <p class="scene-kicker">문서 파쇄</p>
+        <div class="shred-machine">
+          <div class="machine-top">
+            <div class="machine-status"><i></i><span>READY</span><i></i></div>
+            <div class="machine-feed-slot"></div>
+            <div class="machine-controls"><i></i><i></i><i></i></div>
+          </div>
+          <div class="machine-front">
+            <span class="machine-brand">PAPER / RESET</span>
+            <div class="machine-window"><div class="window-grille"></div></div>
+            <div class="machine-vents"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="machine-status-light"></div>
+          </div>
+        </div>
+        <article id="payload" class="payload paper-document">
+          <div id="payload-text" class="paper-lines"></div>
+        </article>
+        <div id="shred-particles" class="shred-particles"></div>
+        <div class="shred-paper-pile" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </section>
+
+      <section class="shred-scene scene-fire" aria-hidden="true">
+        <div class="fire-backlight"></div>
+        <p class="scene-kicker">불태우기</p>
+        <div class="fire-ground-glow"></div>
+        <article id="fire-paper" class="fire-paper paper-document">
+          <div id="fire-text" class="paper-lines"></div>
+          <div class="fire-char"></div>
+        </article>
+        <div class="fire-flames" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="ash-ground" aria-hidden="true"></div>
+        <div id="fire-ash" class="fire-ash" aria-hidden="true"></div>
+      </section>
+
+      <section class="shred-scene scene-blackhole" aria-hidden="true">
+        <div id="starfield" class="starfield"></div>
+        <div class="nebula nebula-one"></div>
+        <div class="nebula nebula-two"></div>
+        <p class="scene-kicker">블랙홀</p>
+        <div class="blackhole-anchor" aria-hidden="true">
+          <div class="accretion-disk disk-back"></div>
+          <div class="blackhole-glow"></div>
+          <div class="event-horizon"></div>
+          <div class="accretion-disk disk-front"></div>
+          <div class="photon-ring"></div>
+        </div>
+        <div class="blackhole-orbit">
+          <div class="paper-vortex" aria-hidden="true"></div>
+          <article id="blackhole-paper" class="payload paper-document">
+            <div id="blackhole-text" class="paper-lines"></div>
+          </article>
+          <div id="blackhole-fragments" class="blackhole-fragments"></div>
+        </div>
+      </section>
+
+      <p id="stage-caption" class="stage-caption"></p>
+    </div>
+  </body>
+</html>

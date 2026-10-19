@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none">
+  <defs>
+    <linearGradient id="paper" x1=".12" y1=".18" x2=".88" y2=".82">
+      <stop stop-color="#fffdf5" />
+      <stop offset=".28" stop-color="#e9dfcf" />
+      <stop offset=".48" stop-color="#fff9ec" />
+      <stop offset=".72" stop-color="#d0c4b1" />
+      <stop offset="1" stop-color="#fffaf0" />
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#655543" stop-opacity=".75" />
+      <stop offset=".25" stop-color="#fffdf5" stop-opacity=".85" />
+      <stop offset=".54" stop-color="#9b8b74" stop-opacity=".45" />
+      <stop offset=".72" stop-color="#fffdf5" stop-opacity=".72" />
+      <stop offset="1" stop-color="#4f4334" stop-opacity=".66" />
+    </linearGradient>
+    <pattern id="writing" width="54" height="42" patternUnits="userSpaceOnUse" patternTransform="rotate(-11)">
+      <path d="M4 8h39M9 16h34M1 24h45M11 32h29M5 39h24" stroke="#635a4d" stroke-opacity=".42" stroke-width="1.5" />
+      <path d="M43 8h5M38 16h9M46 24h4M41 32h7" stroke="#7d7060" stroke-opacity=".3" stroke-width="1.2" />
+    </pattern>
+    <filter id="paper-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur" />
+      <feOffset dy="12" result="offset" />
+      <feComponentTransfer><feFuncA type="linear" slope=".48" /></feComponentTransfer>
+      <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+    <path id="spiral" d="M1035 450 C966 235 790 92 592 78 C369 62 160 205 120 414 C76 638 244 843 463 867 C680 891 865 747 858 548 C852 360 704 224 528 220 C365 216 247 341 260 500 C272 647 393 755 538 723 C650 699 710 601 675 504 C646 423 560 382 482 412 C430 432 408 477 423 522" />
+  </defs>
+
+  <g filter="url(#paper-shadow)" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#spiral" stroke="#34291d" stroke-opacity=".68" stroke-width="112" />
+    <use href="#spiral" stroke="url(#paper)" stroke-width="99" />
+    <use href="#spiral" stroke="url(#writing)" stroke-width="83" stroke-opacity=".42" />
+    <use href="#spiral" stroke="url(#fold)" stroke-width="67" stroke-opacity=".88" />
+    <use href="#spiral" stroke="#fffdf6" stroke-opacity=".72" stroke-width="5" />
+    <use href="#spiral" stroke="#64533e" stroke-opacity=".52" stroke-width="2" stroke-dasharray="2 13" />
+
+    <path d="M916 228 C838 146 742 111 681 116 C634 121 617 149 639 179 C662 210 720 222 772 201" stroke="url(#paper)" stroke-width="54" />
+    <path d="M916 228 C838 146 742 111 681 116 C634 121 617 149 639 179 C662 210 720 222 772 201" stroke="url(#fold)" stroke-width="39" stroke-opacity=".7" />
+    <path d="M82 711 C145 830 259 897 351 894 C416 891 442 858 414 823 C388 791 330 785 284 810" stroke="url(#paper)" stroke-width="63" />
+    <path d="M82 711 C145 830 259 897 351 894 C416 891 442 858 414 823 C388 791 330 785 284 810" stroke="url(#fold)" stroke-width="42" stroke-opacity=".68" />
+
+    <path d="M780 302 C721 251 650 230 599 237" stroke="#62533f" stroke-opacity=".48" stroke-width="3" />
+    <path d="M785 291 C727 241 655 220 606 227" stroke="#fffdf5" stroke-opacity=".82" stroke-width="3" />
+    <path d="M226 648 C275 710 343 748 405 752" stroke="#62533f" stroke-opacity=".45" stroke-width="3" />
+    <path d="M219 636 C270 698 338 736 399 740" stroke="#fffdf5" stroke-opacity=".76" stroke-width="3" />
+  </g>
+</svg>

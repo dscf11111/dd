@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="17" stitchTiles="stitch" />
+    <feColorMatrix type="saturate" values="0" />
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues=".38 .72" />
+      <feFuncG type="table" tableValues=".34 .66" />
+      <feFuncB type="table" tableValues=".28 .57" />
+      <feFuncA type="table" tableValues="0 .22" />
+    </feComponentTransfer>
+    </filter>
+    <filter id="fibers">
+      <feTurbulence type="fractalNoise" baseFrequency=".025 .34" numOctaves="2" seed="41" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues=".62 .92" />
+        <feFuncG type="table" tableValues=".58 .86" />
+        <feFuncB type="table" tableValues=".5 .78" />
+        <feFuncA type="table" tableValues="0 .14" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="256" height="256" filter="url(#grain)" />
+  <rect width="256" height="256" filter="url(#fibers)" />
+  <g fill="none" stroke-linecap="round">
+    <path d="M12 24 C32 19 47 29 73 24 M98 17 C119 21 135 13 157 19 M186 28 C205 24 221 31 244 23" stroke="#89765e" stroke-opacity=".24" stroke-width=".55" />
+    <path d="M9 73 C27 68 42 77 62 71 M81 62 C102 68 117 58 140 64 M160 76 C181 70 203 81 226 72" stroke="#fffdf5" stroke-opacity=".72" stroke-width=".7" />
+    <path d="M19 119 C39 124 51 113 71 119 M91 108 C112 104 127 115 146 108 M176 120 C195 115 219 124 239 116" stroke="#8e7b62" stroke-opacity=".2" stroke-width=".6" />
+    <path d="M8 167 C31 161 45 172 66 166 M84 156 C105 161 126 153 148 159 M171 171 C194 164 218 176 244 168" stroke="#fffdf5" stroke-opacity=".62" stroke-width=".65" />
+    <path d="M15 216 C34 210 52 222 75 215 M99 202 C118 208 139 199 158 205 M181 220 C201 213 221 224 242 215" stroke="#89765e" stroke-opacity=".22" stroke-width=".55" />
+    <path d="M45 43 l18 -3 M148 91 l21 3 M28 143 l14 2 M112 185 l17 -3 M195 193 l18 3 M72 244 l20 -2" stroke="#a49073" stroke-opacity=".24" stroke-width=".45" />
+  </g>
+  <g fill="#817059" opacity=".2">
+    <circle cx="34" cy="53" r=".7" /><circle cx="122" cy="39" r=".55" /><circle cx="213" cy="52" r=".65" />
+    <circle cx="57" cy="96" r=".55" /><circle cx="178" cy="139" r=".7" /><circle cx="236" cy="101" r=".5" />
+    <circle cx="26" cy="192" r=".65" /><circle cx="137" cy="231" r=".55" /><circle cx="221" cy="239" r=".7" />
+  </g>
+</svg>
